@@ -85,7 +85,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Spannable languageMovieItemWord = new SpannableString(context.getString(R.string.span_movie_item_language) + " ");
         languageMovieItemWord.setSpan(new ForegroundColorSpan(Color.BLACK), 0, languageMovieItemWord.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         movieViewHolder.textViewMovieOriginalLanguage.setText(languageMovieItemWord);
-        Spannable languageMovieItem = new SpannableString(mMovieData.get(position).getMovieLanguage());
+        Spannable languageMovieItem = new SpannableString(mMovieData.get(position).getMovieOriginalLanguage());
         languageMovieItem.setSpan(new ForegroundColorSpan(getContext().getResources().getColor(R.color.colorAccent)), 0, languageMovieItem.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         movieViewHolder.textViewMovieOriginalLanguage.append(languageMovieItem);
     }

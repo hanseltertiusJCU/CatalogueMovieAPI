@@ -75,7 +75,8 @@ public class UpcomingViewModel extends AndroidViewModel {
                                 // Iterate semua data yg ada dan tambahkan ke ArrayList
                                 for (int i = 0; i < results.length(); i++) {
                                     JSONObject movie = results.getJSONObject(i);
-                                    MovieItems movieItems = new MovieItems(movie);
+                                    boolean detailedItem = false;
+                                    MovieItems movieItems = new MovieItems(movie, detailedItem);
                                     // Cek jika posterPath itu tidak "null" karena null dr JSON itu berupa
                                     // String, sehingga perlu menggunakan "" di dalam null
                                     if (!movieItems.getMoviePosterPath().equals("null")) {

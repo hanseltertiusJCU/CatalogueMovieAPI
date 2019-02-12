@@ -78,12 +78,14 @@ public class UpcomingMovieFragment extends Fragment {
         // Set background color untuk RecyclerView
         recyclerView.setBackgroundColor(getResources().getColor(R.color.color_white));
 
-        // Buat object DividerItemDecoration dan set drawable untuk DividerItemDecoration
-        DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.item_divider));
+        if(getContext() != null){
+            // Buat object DividerItemDecoration dan set drawable untuk DividerItemDecoration
+            DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+            itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.item_divider));
 
-        // Set divider untuk RecyclerView items
-        recyclerView.addItemDecoration(itemDecorator);
+            // Set divider untuk RecyclerView items
+            recyclerView.addItemDecoration(itemDecorator);
+        }
 
         // Set visiblity of views ketika sedang dalam meretrieve data
         recyclerView.setVisibility(View.INVISIBLE);
@@ -147,7 +149,7 @@ public class UpcomingMovieFragment extends Fragment {
     // Method tsb berguna untuk membuat observer
     public Observer<ArrayList<MovieItems>> createObserver() {
         // Buat Observer yang gunanya untuk update UI
-        Observer<ArrayList<MovieItems>> observer = new Observer<ArrayList<MovieItems>>() {
+        return new Observer<ArrayList<MovieItems>>() {
             @Override
             public void onChanged(@Nullable final ArrayList<MovieItems> movieItems) {
                 // Set LinearLayoutManager object value dengan memanggil LinearLayoutManager constructor
@@ -171,6 +173,5 @@ public class UpcomingMovieFragment extends Fragment {
                 });
             }
         };
-        return observer;
     }
 }

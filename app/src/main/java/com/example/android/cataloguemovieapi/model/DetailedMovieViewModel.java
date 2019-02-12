@@ -9,7 +9,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.example.android.cataloguemovieapi.BuildConfig;
-import com.example.android.cataloguemovieapi.item.DetailedMovieItems;
+import com.example.android.cataloguemovieapi.item.MovieItems;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.SyncHttpClient;
 
@@ -38,11 +38,11 @@ public class DetailedMovieViewModel extends AndroidViewModel {
         detailedMovieLiveData = new DetailedMovieLiveData(application, detailedMovieId);
     }
 
-    public LiveData<ArrayList<DetailedMovieItems>> getDetailedMovie() {
+    public LiveData<ArrayList<MovieItems>> getDetailedMovie() {
         return detailedMovieLiveData;
     }
 
-    private class DetailedMovieLiveData extends LiveData<ArrayList<DetailedMovieItems>> {
+    private class DetailedMovieLiveData extends LiveData<ArrayList<MovieItems>> {
         private final Context context;
         private final int id;
 
@@ -56,14 +56,14 @@ public class DetailedMovieViewModel extends AndroidViewModel {
         @SuppressLint("StaticFieldLeak")
         private void loadDetailedMovieLiveData() {
 
-            new AsyncTask<Void, Void, ArrayList<DetailedMovieItems>>() {
+            new AsyncTask<Void, Void, ArrayList<MovieItems>>() {
 
                 @Override
-                protected ArrayList<DetailedMovieItems> doInBackground(Void... voids) {
+                protected ArrayList<MovieItems> doInBackground(Void... voids) {
 
                     SyncHttpClient syncHttpClient = new SyncHttpClient();
 
-                    final ArrayList<DetailedMovieItems> detailedMovieItemses = new ArrayList<>();
+                    final ArrayList<MovieItems> movieItemses = new ArrayList<>();
 
                     String detailedMovieUrl = detailedUrlBase + mDetailedMovieId + apiKeyFiller + apiKey;
 
@@ -81,8 +81,9 @@ public class DetailedMovieViewModel extends AndroidViewModel {
                             try {
                                 String result = new String(responseBody);
                                 JSONObject responseObject = new JSONObject(result);
-                                DetailedMovieItems detailedMovieItems = new DetailedMovieItems(responseObject);
-                                detailedMovieItemses.add(detailedMovieItems);
+                                boolean detailedItem = true;
+                                MovieItems movieItems = new MovieItems(responseObject, detailedItem);
+                                movieItemses.add(movieItems);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -94,14 +95,14 @@ public class DetailedMovieViewModel extends AndroidViewModel {
                         }
                     });
 
-                    return detailedMovieItemses;
+                    return movieItemses;
                 }
 
                 @Override
-                protected void onPostExecute(ArrayList<DetailedMovieItems> detailedMovieItems) {
+                protected void onPostExecute(ArrayList<MovieItems> movieItems) {
                     // Set value dari Observer yang berisi ArrayList yang merupakan
                     // hasil dari doInBackground method
-                    setValue(detailedMovieItems);
+                    setValue(movieItems);
                 }
             }.execute(); // Execute AsyncTask
         }

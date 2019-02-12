@@ -24,14 +24,11 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tabNowPlaying;
     private TextView tabUpcoming;
-    private TextView tabSearch;
 
     private Drawable[] nowPlayingDrawables;
     private Drawable nowPlayingDrawable;
     private Drawable[] upcomingDrawables;
     private Drawable upcomingDrawable;
-    private Drawable[] searchDrawables;
-    private Drawable searchDrawable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

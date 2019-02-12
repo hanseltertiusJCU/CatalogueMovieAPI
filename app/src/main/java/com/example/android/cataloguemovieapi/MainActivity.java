@@ -16,10 +16,15 @@ import com.example.android.cataloguemovieapi.adapter.MovieSectionsFragmentPagerA
 import com.example.android.cataloguemovieapi.fragment.NowPlayingMovieFragment;
 import com.example.android.cataloguemovieapi.fragment.UpcomingMovieFragment;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
+    // Create ViewPager untuk swipe Fragments
+    @BindView(R.id.movie_viewPager) ViewPager viewPager;
+    // Assign TabLayout
+    @BindView(R.id.menu_tabs) TabLayout tabLayout;
     private MovieSectionsFragmentPagerAdapter movieSectionsFragmentPagerAdapter;
 
     private TextView tabNowPlaying;
@@ -36,11 +41,10 @@ public class MainActivity extends AppCompatActivity {
         // Set content activity to use layout xml file activity_main.xml
         setContentView(R.layout.activity_main);
 
+        ButterKnife.bind(this);
+
         // Set default action bar title, yaitu "Now Playing"
         setActionBarTitle(getString(R.string.now_playing));
-
-        // Create ViewPager untuk swipe Fragments
-        viewPager = (ViewPager) findViewById(R.id.movie_viewPager);
 
         // Panggil method ini untuk saving Fragment state di ViewPager, kesannya kyk simpen
         // fragment ketika sebuah fragment sedang tidak di display.
@@ -51,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
         // Panggil method tsb untuk membuat fragment yang akan disimpan ke ViewPager
         createViewPagerContent(viewPager);
 
-        // Assign TabLayout
-        tabLayout = (TabLayout) findViewById(R.id.menu_tabs);
         // Beri ViewPager ke TabLayout
         tabLayout.setupWithViewPager(viewPager);
 

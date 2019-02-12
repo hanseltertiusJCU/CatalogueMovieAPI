@@ -24,20 +24,25 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class DetailActivity extends AppCompatActivity {
-    private ImageView imageViewDetailedPosterImage;
-    private TextView textViewDetailedMovieTitle;
-    private TextView textViewDetailedMovieTagline;
-    private TextView textViewDetailedMovieRuntime;
-    private TextView textViewDetailedMovieRating;
-    private TextView textViewDetailedMovieLanguage;
-    private TextView textViewDetailedMovieGenres;
-    private TextView textViewDetailedMovieReleaseDate;
-    private TextView textViewDetailedMovieOverview;
+    // Setup views bedasarkan id yang ada di layout xml
+    @BindView(R.id.detailed_poster_image) ImageView imageViewDetailedPosterImage;
+    @BindView(R.id.detailed_movie_title_text) TextView textViewDetailedMovieTitle;
+    @BindView(R.id.detailed_movie_tagline_text) TextView textViewDetailedMovieTagline;
+    @BindView(R.id.detailed_movie_status_text) TextView textViewDetailedMovieStatus;
+    @BindView(R.id.detailed_movie_rating_text) TextView textViewDetailedMovieRating;
+    @BindView(R.id.detailed_movie_languages_text) TextView textViewDetailedMovieLanguage;
+    @BindView(R.id.detailed_movie_genres_text) TextView textViewDetailedMovieGenres;
+    @BindView(R.id.detailed_movie_release_date_text) TextView textViewDetailedMovieReleaseDate;
+    @BindView(R.id.detailed_movie_overview_text) TextView textViewDetailedMovieOverview;
     private int detailedMovieId;
     private String detailedMovieTitle;
-    private LinearLayout detailedMovieContentItem;
-    private ProgressBar detailedProgressBar;
+    // Set layout value untuk dapat menjalankan process loading data
+    @BindView(R.id.detailed_movie_item) LinearLayout detailedMovieContentItem;
+    @BindView(R.id.detailed_progress_bar) ProgressBar detailedProgressBar;
 
     // Gunakan BuildConfig untuk menjaga credential
     private String baseImageUrl = BuildConfig.IMAGE_MOVIE_URL;
@@ -51,24 +56,11 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        // Setup views bedasarkan id yang ada di layout xml
-        imageViewDetailedPosterImage = findViewById(R.id.detailed_poster_image);
-        textViewDetailedMovieTitle = findViewById(R.id.detailed_movie_title_text);
-        textViewDetailedMovieTagline = findViewById(R.id.detailed_movie_tagline_text);
-        textViewDetailedMovieRuntime = findViewById(R.id.detailed_movie_status_text);
-        textViewDetailedMovieRating = findViewById(R.id.detailed_movie_rating_text);
-        textViewDetailedMovieLanguage = findViewById(R.id.detailed_movie_languages_text);
-        textViewDetailedMovieGenres = findViewById(R.id.detailed_movie_genres_text);
-        textViewDetailedMovieReleaseDate = findViewById(R.id.detailed_movie_release_date_text);
-        textViewDetailedMovieOverview = findViewById(R.id.detailed_movie_overview_text);
+        ButterKnife.bind(this);
 
         // Get intent untuk mendapatkan id dan title dari {@link MainActivity}
         detailedMovieId = getIntent().getIntExtra(NowPlayingMovieFragment.MOVIE_ID_DATA, 0);
         detailedMovieTitle = getIntent().getStringExtra(NowPlayingMovieFragment.MOVIE_TITLE_DATA);
-
-        // Set layout value untuk dapat menjalankan process loading data
-        detailedMovieContentItem = findViewById(R.id.detailed_movie_item);
-        detailedProgressBar = findViewById(R.id.detailed_progress_bar);
 
         // Set action bar title untuk DetailActivity
         getSupportActionBar().setTitle(detailedMovieTitle);
@@ -107,10 +99,10 @@ public class DetailActivity extends AppCompatActivity {
                 // Set textview content in detailed movie runtime to contain a variety of different colors
                 Spannable statusWord = new SpannableString(getString(R.string.span_movie_detail_status) + " ");
                 statusWord.setSpan(new ForegroundColorSpan(Color.BLACK), 0, statusWord.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                textViewDetailedMovieRuntime.setText(statusWord);
+                textViewDetailedMovieStatus.setText(statusWord);
                 Spannable statusDetailedMovie = new SpannableString(detailedMovieItems.get(0).getMovieStatus());
                 statusDetailedMovie.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.colorAccent)), 0, statusDetailedMovie.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                textViewDetailedMovieRuntime.append(statusDetailedMovie);
+                textViewDetailedMovieStatus.append(statusDetailedMovie);
 
                 // Set textview content in detailed movie rating to contain a variety of different colors
                 Spannable ratingWord = new SpannableString(getString(R.string.span_movie_detail_rating) + " ");

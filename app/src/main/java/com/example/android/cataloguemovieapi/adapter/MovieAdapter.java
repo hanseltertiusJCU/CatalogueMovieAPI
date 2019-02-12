@@ -21,6 +21,9 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
 
     private ArrayList<MovieItems> mMovieData = new ArrayList<>();
@@ -103,20 +106,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     // Kelas ini berguna untuk menampung view yang ada tanpa mendeclare view di sebuah Adapter
     public class MovieViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageViewMoviePoster;
-        TextView textViewMovieTitle;
-        TextView textViewMovieRatings;
-        TextView textViewMovieReleaseDate;
-        TextView textViewMovieOriginalLanguage;
+        @BindView(R.id.poster_image) ImageView imageViewMoviePoster;
+        @BindView(R.id.movie_title_text) TextView textViewMovieTitle;
+        @BindView(R.id.movie_ratings_text) TextView textViewMovieRatings;
+        @BindView(R.id.movie_release_date_text) TextView textViewMovieReleaseDate;
+        @BindView(R.id.movie_language_text) TextView textViewMovieOriginalLanguage;
 
         // Assign view di dalam constructor
         public MovieViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageViewMoviePoster = itemView.findViewById(R.id.poster_image);
-            textViewMovieTitle = itemView.findViewById(R.id.movie_title_text);
-            textViewMovieRatings = itemView.findViewById(R.id.movie_ratings_text);
-            textViewMovieReleaseDate = itemView.findViewById(R.id.movie_release_date_text);
-            textViewMovieOriginalLanguage = itemView.findViewById(R.id.movie_language_text);
+            ButterKnife.bind(this, itemView);
         }
     }
 

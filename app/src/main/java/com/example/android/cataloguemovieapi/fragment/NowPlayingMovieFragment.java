@@ -28,6 +28,9 @@ import com.example.android.cataloguemovieapi.support.MovieItemClickSupport;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -38,10 +41,9 @@ public class NowPlayingMovieFragment extends Fragment {
     public static final String MOVIE_TITLE_DATA = "MOVIE_TITLE_DATA";
     // Bikin constant (key) yang merepresent Parcelable object
     private static final String MOVIE_LIST_STATE = "movieListState";
-    private RecyclerView recyclerView;
+    @BindView(R.id.rv_list) RecyclerView recyclerView;
     private MovieAdapter movieAdapter;
-    private ProgressBar progressBar;
-    private LinearLayout searchLayout;
+    @BindView(R.id.progress_bar) ProgressBar progressBar;
     private Observer<ArrayList<MovieItems>> nowPlayingObserver;
     private NowPlayingViewModel nowPlayingViewModel;
     // Bikin parcelable yang berguna untuk menyimpan lalu merestore position
@@ -58,19 +60,17 @@ public class NowPlayingMovieFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movie, container, false);
+        View view = inflater.inflate(R.layout.fragment_movie, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // Assign view yang ada di Fragment
-        progressBar = view.findViewById(R.id.progress_bar);
 
         movieAdapter = new MovieAdapter(getContext());
         movieAdapter.notifyDataSetChanged();
-
-        recyclerView = view.findViewById(R.id.rv_list);
 
         // Set background color untuk RecyclerView
         recyclerView.setBackgroundColor(getResources().getColor(R.color.color_white));

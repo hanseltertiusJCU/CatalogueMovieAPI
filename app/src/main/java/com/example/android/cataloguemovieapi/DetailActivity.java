@@ -17,7 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.android.cataloguemovieapi.factory.DetailedMovieViewModelFactory;
-import com.example.android.cataloguemovieapi.fragment.SearchMovieFragment;
+import com.example.android.cataloguemovieapi.fragment.NowPlayingMovieFragment;
 import com.example.android.cataloguemovieapi.item.DetailedMovieItems;
 import com.example.android.cataloguemovieapi.model.DetailedMovieViewModel;
 import com.squareup.picasso.Picasso;
@@ -65,8 +65,8 @@ public class DetailActivity extends AppCompatActivity {
         textViewDetailedMovieOverview = findViewById(R.id.detailed_movie_overview_text);
 
         // Get intent untuk mendapatkan id dan title dari {@link MainActivity}
-        detailedMovieId = getIntent().getIntExtra(SearchMovieFragment.MOVIE_ID_DATA, 0);
-        detailedMovieTitle = getIntent().getStringExtra(SearchMovieFragment.MOVIE_TITLE_DATA);
+        detailedMovieId = getIntent().getIntExtra(NowPlayingMovieFragment.MOVIE_ID_DATA, 0);
+        detailedMovieTitle = getIntent().getStringExtra(NowPlayingMovieFragment.MOVIE_TITLE_DATA);
 
         // Set layout value untuk dapat menjalankan process loading data
         detailedMovieContentItem = findViewById(R.id.detailed_movie_item);

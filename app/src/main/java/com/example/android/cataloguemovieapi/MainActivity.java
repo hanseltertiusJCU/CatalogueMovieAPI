@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.android.cataloguemovieapi.adapter.MovieSectionsFragmentPagerAdapter;
 import com.example.android.cataloguemovieapi.fragment.NowPlayingMovieFragment;
-import com.example.android.cataloguemovieapi.fragment.SearchMovieFragment;
 import com.example.android.cataloguemovieapi.fragment.UpcomingMovieFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
 
         // Panggil method ini untuk saving Fragment state di ViewPager, kesannya kyk simpen
         // fragment ketika sebuah fragment sedang tidak di display.
-        // Kita menggunakan value 2 sebagai parameter karena kita punya 3 fragments, dan kita
-        // hanya butuh simpan 2 fragments (1 lg untuk display).
-        viewPager.setOffscreenPageLimit(2);
+        // Kita menggunakan value 1 sebagai parameter karena kita punya 2 fragments, dan kita
+        // hanya butuh simpan 1 fragments (1 lg untuk display).
+        viewPager.setOffscreenPageLimit(1);
 
         // Panggil method tsb untuk membuat fragment yang akan disimpan ke ViewPager
         createViewPagerContent(viewPager);
@@ -86,12 +85,6 @@ public class MainActivity extends AppCompatActivity {
                         upcomingDrawable = upcomingDrawables[1];
                         upcomingDrawable.setTint(getResources().getColor(R.color.colorAccent));
                         break;
-                    case 2:
-                        tabSearch.setTextColor(getResources().getColor(R.color.colorAccent));
-                        searchDrawables = tabSearch.getCompoundDrawables();
-                        searchDrawable = searchDrawables[1];
-                        searchDrawable.setTint(getResources().getColor(R.color.colorAccent));
-                        break;
                     default:
                         break;
                 }
@@ -115,12 +108,6 @@ public class MainActivity extends AppCompatActivity {
                         upcomingDrawables = tabUpcoming.getCompoundDrawables();
                         upcomingDrawable = upcomingDrawables[1];
                         upcomingDrawable.setTint(getResources().getColor(R.color.color_black));
-                        break;
-                    case 2:
-                        tabSearch.setTextColor(getResources().getColor(R.color.color_black));
-                        searchDrawables = tabSearch.getCompoundDrawables();
-                        searchDrawable = searchDrawables[1];
-                        searchDrawable.setTint(getResources().getColor(R.color.color_black));
                         break;
                     default:
                         break;
@@ -160,11 +147,6 @@ public class MainActivity extends AppCompatActivity {
         tabUpcoming.setText(getString(R.string.upcoming));
         tabUpcoming.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_upcoming, 0,0);
         tabLayout.getTabAt(1).setCustomView(tabUpcoming);
-
-        tabSearch = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
-        tabSearch.setText(getString(R.string.search_movie));
-        tabSearch.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_search, 0, 0);
-        tabLayout.getTabAt(2).setCustomView(tabSearch);
     }
 
     // Method tsb berguna untuk membuat isi dari ViewPager
@@ -176,7 +158,6 @@ public class MainActivity extends AppCompatActivity {
         // Tambahkan fragment beserta title ke FragmentPagerAdapter, method tsb adalah
         movieSectionsFragmentPagerAdapter.addMovieSectionFragment(new NowPlayingMovieFragment(), getString(R.string.now_playing));
         movieSectionsFragmentPagerAdapter.addMovieSectionFragment(new UpcomingMovieFragment(), getString(R.string.upcoming));
-        movieSectionsFragmentPagerAdapter.addMovieSectionFragment(new SearchMovieFragment(), getString(R.string.search_movie));
 
         // Set FragmentPagerAdapter ke ViewPager
         viewPager.setAdapter(movieSectionsFragmentPagerAdapter);

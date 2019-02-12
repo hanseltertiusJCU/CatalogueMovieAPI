@@ -78,9 +78,6 @@ public class UpcomingMovieFragment extends Fragment {
         // Set background color untuk RecyclerView
         recyclerView.setBackgroundColor(getResources().getColor(R.color.color_white));
 
-        searchLayout = view.findViewById(R.id.search_menu);
-        searchLayout.setVisibility(View.GONE);
-
         // Buat object DividerItemDecoration dan set drawable untuk DividerItemDecoration
         DividerItemDecoration itemDecorator = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         itemDecorator.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.item_divider));

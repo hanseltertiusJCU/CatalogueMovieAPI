@@ -2,64 +2,47 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/list_item_height"
     android:background="@drawable/border"
     android:foreground="?android:attr/selectableItemBackground">
 
     <ImageView
         android:id="@+id/poster_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
+        style="@style/PosterImage"
         android:layout_marginLeft="@dimen/inner_view_margin"
+        android:layout_centerVertical="true"
         tools:src="@drawable/no_image_available" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_toRightOf="@id/poster_image"
+        android:layout_margin="@dimen/inner_view_margin"
+        android:layout_centerInParent="true"
         android:orientation="vertical"
         android:weightSum="1">
 
         <TextView
             android:id="@+id/movie_title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_weight="0.25"
-            android:textColor="@color/colorPrimary"
+            style="@style/ItemMovieText"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/movie_section_title"
             android:textStyle="bold"
             tools:text="@string/movie_title_text" />
 
         <TextView
             android:id="@+id/movie_ratings_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_weight="0.25"
+            style="@style/ItemMovieText"
             tools:text="@string/movie_ratings_text" />
 
         <TextView
             android:id="@+id/movie_release_date_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_weight="0.25"
+            style="@style/ItemMovieText"
             tools:text="@string/movie_release_date_text" />
 
         <TextView
             android:id="@+id/movie_language_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_weight="0.25"
+            style="@style/ItemMovieText"
             tools:text="@string/movie_language_text" />
 
     </LinearLayout>

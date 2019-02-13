@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -9,7 +8,7 @@
     </style>
 
     <style name="ButtonSearch" parent="Base.TextAppearance.AppCompat.Button">
-        <item name="android:color">@color/color_button</item>
+        <item name="android:color">@color/colorAccent</item>
     </style>
 
     <style name="ProgressBar">
@@ -17,6 +16,20 @@
         <item name="android:layout_height">@dimen/progress_bar_height</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_centerHorizontal">true</item>
+    </style>
+
+    <style name="ItemMovieText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/inner_view_margin</item>
+        <item name="android:layout_marginRight">@dimen/inner_view_margin</item>
+        <item name="android:layout_weight">0.25</item>
+    </style>
+
+    <style name="PosterImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerVertical">true</item>
     </style>
 
     <style name="TextTab">
@@ -39,7 +52,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">0.2</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
-        <item name="android:background">@color/color_button</item>
+        <item name="android:background">@color/colorAccent</item>
         <item name="android:textColor">@color/color_white</item>
         <item name="android:layout_margin">@dimen/inner_view_margin</item>
         <item name="android:text">@string/search_text</item>
@@ -49,8 +62,10 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">0.25</item>
-        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
-        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginLeft">@dimen/inner_view_margin</item>
+        <item name="android:layout_marginRight">@dimen/inner_view_margin</item>
+        <item name="android:layout_marginTop">@dimen/text_margin</item>
+        <item name="android:textColor">@color/color_black</item>
     </style>
 
     <style name="DetailedMovieScrollViewTitleText">
@@ -58,13 +73,14 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/movie_section_title</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/color_title</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:layout_marginTop">@dimen/text_margin</item>
     </style>
 
     <style name="DetailedMovieScrollViewContentText">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/color_black</item>
+        <item name="android:layout_marginTop">@dimen/text_margin</item>
     </style>
-
 </resources>

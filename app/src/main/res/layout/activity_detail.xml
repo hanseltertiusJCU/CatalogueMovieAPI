@@ -21,22 +21,20 @@
 
             <ImageView
                 android:id="@+id/detailed_poster_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:src="@drawable/no_image_available" />
+                style="@style/PosterImage"
+                tools:src="@drawable/no_image_available"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/detailed_poster_image"
+                android:layout_centerInParent="true"
                 android:orientation="vertical"
                 android:weightSum="1">
 
                 <TextView
                     android:id="@+id/detailed_movie_title_text"
                     style="@style/DetailedMovieText"
-                    android:textColor="@color/colorPrimaryDark"
                     android:textSize="@dimen/movie_detailed_title"
                     android:textStyle="bold"
                     tools:text="@string/detailed_movie_title_text" />
@@ -56,8 +54,8 @@
                 <TextView
                     android:id="@+id/detailed_movie_rating_text"
                     style="@style/DetailedMovieText"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:textColor="@color/color_black"
+                    android:layout_marginBottom="@dimen/text_margin"
                     tools:text="@string/detailed_movie_rating_text" />
 
             </LinearLayout>
@@ -75,12 +73,13 @@
 
                 <TextView
                     style="@style/DetailedMovieScrollViewTitleText"
-                    android:text="@string/languages_title" />
+                    android:text="@string/languages_title"
+                    android:layout_marginTop="@dimen/text_margin"/>
 
                 <TextView
                     android:id="@+id/detailed_movie_languages_text"
                     style="@style/DetailedMovieScrollViewContentText"
-                    tools:text="@string/detailed_movie_languages_text" />
+                    tools:text="@string/detailed_movie_languages_text"/>
 
                 <TextView
                     style="@style/DetailedMovieScrollViewTitleText"
@@ -107,6 +106,7 @@
                 <TextView
                     android:id="@+id/detailed_movie_overview_text"
                     style="@style/DetailedMovieScrollViewContentText"
+                    android:layout_marginBottom="@dimen/text_margin"
                     tools:text="@string/detailed_movie_overview_text" />
 
             </LinearLayout>

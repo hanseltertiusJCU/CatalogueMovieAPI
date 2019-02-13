@@ -7,4 +7,6 @@
     <dimen name="movie_detailed_title">24sp</dimen>
     <dimen name="progress_bar_width">48dp</dimen>
     <dimen name="progress_bar_height">48dp</dimen>
+    <dimen name="list_item_height">176dp</dimen>
+    <dimen name="text_margin">4dp</dimen>
 </resources>

@@ -7,6 +7,7 @@ import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private Drawable[] upcomingDrawables;
     private Drawable upcomingDrawable;
 
+    @BindView(R.id.main_toolbar) Toolbar mainToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        // Set default action bar title, yaitu "Now Playing"
-        setActionBarTitle(getString(R.string.now_playing));
+        setSupportActionBar(mainToolbar);
+
+        // Cek kalo ada action bar
+        if(getSupportActionBar() != null){
+            // Set default action bar title, yaitu "Now Playing"
+            getSupportActionBar().setTitle(getString(R.string.now_playing));
+        }
 
         // Panggil method ini untuk saving Fragment state di ViewPager, kesannya kyk simpen
         // fragment ketika sebuah fragment sedang tidak di display.

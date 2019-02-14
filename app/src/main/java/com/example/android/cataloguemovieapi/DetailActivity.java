@@ -5,8 +5,9 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -45,9 +46,10 @@ public class DetailActivity extends AppCompatActivity {
     private int detailedMovieId;
     private String detailedMovieTitle;
     // Set layout value untuk dapat menjalankan process loading data
-    @BindView(R.id.detailed_movie_item)
-    ConstraintLayout detailedMovieContentItem;
     @BindView(R.id.detailed_progress_bar) ProgressBar detailedProgressBar;
+
+    @BindView(R.id.detailed_app_bar) AppBarLayout detailedAppBarLayout;
+    @BindView(R.id.detailed_toolbar) Toolbar detailedToolbar;
 
     // Gunakan BuildConfig untuk menjaga credential
     private String baseImageUrl = BuildConfig.IMAGE_MOVIE_URL;
@@ -63,12 +65,18 @@ public class DetailActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        setSupportActionBar(detailedToolbar);
+
         // Get intent untuk mendapatkan id dan title dari {@link MainActivity}
         detailedMovieId = getIntent().getIntExtra(NowPlayingMovieFragment.MOVIE_ID_DATA, 0);
         detailedMovieTitle = getIntent().getStringExtra(NowPlayingMovieFragment.MOVIE_TITLE_DATA);
 
-        // Set action bar title untuk DetailActivity
-        getSupportActionBar().setTitle(detailedMovieTitle);
+        // Cek kalo ada action bar
+        if(getSupportActionBar() != null){
+            // Set action bar title untuk DetailActivity
+            getSupportActionBar().setTitle(detailedMovieTitle);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         // Set visiblity of views ketika sedang dalam meretrieve data
         imageViewDetailedPosterImage.setVisibility(View.INVISIBLE);
@@ -94,6 +102,24 @@ public class DetailActivity extends AppCompatActivity {
 
         // Tempelkan Observer ke LiveData object
         detailedMovieViewModel.getDetailedMovie().observe(this, detailedMovieObserver);
+
+        detailedAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            boolean isAppBarLayoutShow = false;
+            int scrollRange = -1;
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                if(scrollRange == -1){
+                    scrollRange = appBarLayout.getTotalScrollRange();
+                }
+
+                if(scrollRange + verticalOffset == 0){
+                    isAppBarLayoutShow = true;
+                } else if(isAppBarLayoutShow){
+                    isAppBarLayoutShow = false;
+                }
+
+            }
+        });
     }
 
     private Observer<ArrayList<MovieItems>> createObserver(){

@@ -1,119 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/detailed_movie_item"
+    android:id="@+id/coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/activity_vertical_margin"
+    android:fitsSystemWindows="true"
     tools:context=".DetailActivity">
 
-    <ImageView
-        android:id="@+id/detailed_poster_image"
-        style="@style/PosterImage"
-        android:layout_margin="@dimen/inner_view_margin"
-        app:layout_constraintBottom_toTopOf="@+id/include_scrollable_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.01"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@drawable/no_image_available" />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/detailed_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/detailed_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-    <TextView
-        android:id="@+id/detailed_movie_title_text"
-        style="@style/DetailedMovieText"
-        android:layout_marginLeft="@dimen/inner_view_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:layout_marginRight="@dimen/inner_view_margin"
-        android:textSize="@dimen/movie_detailed_title"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/detailed_movie_tagline_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/detailed_poster_image"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_weight="1"
-        tools:text="@string/detailed_movie_title_text" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/detailed_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-    <TextView
-        android:id="@+id/detailed_movie_tagline_text"
-        style="@style/DetailedMovieText"
-        android:layout_marginLeft="@dimen/inner_view_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:layout_marginRight="@dimen/inner_view_margin"
-        android:textColor="@color/color_black"
-        app:layout_constraintBottom_toTopOf="@+id/detailed_movie_status_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/detailed_poster_image"
-        app:layout_constraintTop_toBottomOf="@+id/detailed_movie_title_text"
-        app:layout_constraintVertical_weight="1"
-        tools:text="@string/detailed_movie_tagline_text" />
+        </android.support.design.widget.CollapsingToolbarLayout>
 
-    <TextView
-        android:id="@+id/detailed_movie_status_text"
-        style="@style/DetailedMovieText"
-        android:layout_marginLeft="@dimen/inner_view_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:layout_marginRight="@dimen/inner_view_margin"
-        android:textColor="@color/color_black"
-        app:layout_constraintBottom_toTopOf="@+id/detailed_movie_rating_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/detailed_poster_image"
-        app:layout_constraintTop_toBottomOf="@+id/detailed_movie_tagline_text"
-        app:layout_constraintVertical_weight="1"
-        tools:text="@string/detailed_movie_status_text" />
+    </android.support.design.widget.AppBarLayout>
 
-    <TextView
-        android:id="@+id/detailed_movie_rating_text"
-        style="@style/DetailedMovieText"
-        android:layout_marginLeft="@dimen/inner_view_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:layout_marginRight="@dimen/inner_view_margin"
-        android:layout_marginBottom="@dimen/text_margin"
-        android:textColor="@color/color_black"
-        app:layout_constraintBottom_toTopOf="@+id/include_scrollable_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/detailed_poster_image"
-        app:layout_constraintTop_toBottomOf="@+id/detailed_movie_status_text"
-        app:layout_constraintVertical_weight="1"
-        tools:text="@string/detailed_movie_rating_text" />
-
-
-    <include
-        android:id="@+id/include_scrollable_info"
-        layout="@layout/scrollable_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailed_poster_image" />
+    <include layout="@layout/detailed_content_scrolling"/>
 
     <ProgressBar
         android:id="@+id/detailed_progress_bar"
         style="@style/ProgressBar"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_gravity="center" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="264dp" />
-
-
-</android.support.constraint.ConstraintLayout>
-
+</android.support.design.widget.CoordinatorLayout>

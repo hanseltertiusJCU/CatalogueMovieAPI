@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -24,8 +23,8 @@
     <TextView
         android:id="@+id/movie_title_text"
         style="@style/ItemMovieText"
-        android:layout_marginTop="@dimen/text_margin"
         android:layout_marginStart="@dimen/inner_view_margin"
+        android:layout_marginTop="@dimen/text_margin"
         android:layout_marginEnd="@dimen/inner_view_margin"
         android:textColor="@color/colorAccent"
         android:textSize="@dimen/movie_section_title"
@@ -41,8 +40,8 @@
     <TextView
         android:id="@+id/movie_ratings_text"
         style="@style/ItemMovieText"
-        android:layout_marginTop="@dimen/text_margin"
         android:layout_marginStart="@dimen/inner_view_margin"
+        android:layout_marginTop="@dimen/text_margin"
         android:layout_marginEnd="@dimen/inner_view_margin"
         app:layout_constraintBottom_toTopOf="@+id/movie_release_date_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,5 +77,12 @@
         app:layout_constraintTop_toBottomOf="@+id/movie_release_date_text"
         app:layout_constraintVertical_weight="1"
         tools:text="@string/movie_language_text" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="112dp" />
 
 </android.support.constraint.ConstraintLayout>

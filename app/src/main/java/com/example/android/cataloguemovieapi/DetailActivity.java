@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -12,7 +13,6 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -38,10 +38,15 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.detailed_movie_genres_text) TextView textViewDetailedMovieGenres;
     @BindView(R.id.detailed_movie_release_date_text) TextView textViewDetailedMovieReleaseDate;
     @BindView(R.id.detailed_movie_overview_text) TextView textViewDetailedMovieOverview;
+    @BindView(R.id.languages_spoken) TextView languageSpoken;
+    @BindView(R.id.genres) TextView genres;
+    @BindView(R.id.release_date) TextView releaseDate;
+    @BindView(R.id.overview) TextView overview;
     private int detailedMovieId;
     private String detailedMovieTitle;
     // Set layout value untuk dapat menjalankan process loading data
-    @BindView(R.id.detailed_movie_item) LinearLayout detailedMovieContentItem;
+    @BindView(R.id.detailed_movie_item)
+    ConstraintLayout detailedMovieContentItem;
     @BindView(R.id.detailed_progress_bar) ProgressBar detailedProgressBar;
 
     // Gunakan BuildConfig untuk menjaga credential
@@ -66,7 +71,19 @@ public class DetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(detailedMovieTitle);
 
         // Set visiblity of views ketika sedang dalam meretrieve data
-        detailedMovieContentItem.setVisibility(View.INVISIBLE);
+        imageViewDetailedPosterImage.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieTitle.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieGenres.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieLanguage.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieOverview.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieRating.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieReleaseDate.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieStatus.setVisibility(View.INVISIBLE);
+        textViewDetailedMovieTagline.setVisibility(View.INVISIBLE);
+        languageSpoken.setVisibility(View.INVISIBLE);
+        genres.setVisibility(View.INVISIBLE);
+        releaseDate.setVisibility(View.INVISIBLE);
+        overview.setVisibility(View.INVISIBLE);
         detailedProgressBar.setVisibility(View.VISIBLE);
 
         // Panggil MovieViewModel dengan menggunakan ViewModelFactory sebagai parameter tambahan (dan satu-satunya pilihan) selain activity
@@ -85,7 +102,19 @@ public class DetailActivity extends AppCompatActivity {
             public void onChanged(@Nullable ArrayList<MovieItems> detailedMovieItems) {
                 // Ketika data selesai di load, maka kita akan mendapatkan data dan menghilangkan progress bar
                 // yang menandakan bahwa loadingnya sudah selesai
-                detailedMovieContentItem.setVisibility(View.VISIBLE);
+                imageViewDetailedPosterImage.setVisibility(View.VISIBLE);
+                textViewDetailedMovieTitle.setVisibility(View.VISIBLE);
+                textViewDetailedMovieGenres.setVisibility(View.VISIBLE);
+                textViewDetailedMovieLanguage.setVisibility(View.VISIBLE);
+                textViewDetailedMovieOverview.setVisibility(View.VISIBLE);
+                textViewDetailedMovieRating.setVisibility(View.VISIBLE);
+                textViewDetailedMovieReleaseDate.setVisibility(View.VISIBLE);
+                textViewDetailedMovieStatus.setVisibility(View.VISIBLE);
+                textViewDetailedMovieTagline.setVisibility(View.VISIBLE);
+                languageSpoken.setVisibility(View.VISIBLE);
+                genres.setVisibility(View.VISIBLE);
+                releaseDate.setVisibility(View.VISIBLE);
+                overview.setVisibility(View.VISIBLE);
                 detailedProgressBar.setVisibility(View.GONE);
 
                 // Set semua data ke dalam detail activity

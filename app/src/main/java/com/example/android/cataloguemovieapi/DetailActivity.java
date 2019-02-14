@@ -14,6 +14,7 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -39,14 +40,13 @@ public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.detailed_movie_genres_text) TextView textViewDetailedMovieGenres;
     @BindView(R.id.detailed_movie_release_date_text) TextView textViewDetailedMovieReleaseDate;
     @BindView(R.id.detailed_movie_overview_text) TextView textViewDetailedMovieOverview;
-    @BindView(R.id.languages_spoken) TextView languageSpoken;
-    @BindView(R.id.genres) TextView genres;
-    @BindView(R.id.release_date) TextView releaseDate;
-    @BindView(R.id.overview) TextView overview;
     private int detailedMovieId;
     private String detailedMovieTitle;
     // Set layout value untuk dapat menjalankan process loading data
     @BindView(R.id.detailed_progress_bar) ProgressBar detailedProgressBar;
+
+    @BindView(R.id.detailed_content_movie)
+    LinearLayout detailedContentMovie;
 
     @BindView(R.id.detailed_app_bar) AppBarLayout detailedAppBarLayout;
     @BindView(R.id.detailed_toolbar) Toolbar detailedToolbar;
@@ -75,23 +75,12 @@ public class DetailActivity extends AppCompatActivity {
         if(getSupportActionBar() != null){
             // Set action bar title untuk DetailActivity
             getSupportActionBar().setTitle(detailedMovieTitle);
+            // Set up button
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         // Set visiblity of views ketika sedang dalam meretrieve data
-        imageViewDetailedPosterImage.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieTitle.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieGenres.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieLanguage.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieOverview.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieRating.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieReleaseDate.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieStatus.setVisibility(View.INVISIBLE);
-        textViewDetailedMovieTagline.setVisibility(View.INVISIBLE);
-        languageSpoken.setVisibility(View.INVISIBLE);
-        genres.setVisibility(View.INVISIBLE);
-        releaseDate.setVisibility(View.INVISIBLE);
-        overview.setVisibility(View.INVISIBLE);
+        detailedContentMovie.setVisibility(View.INVISIBLE);
         detailedProgressBar.setVisibility(View.VISIBLE);
 
         // Panggil MovieViewModel dengan menggunakan ViewModelFactory sebagai parameter tambahan (dan satu-satunya pilihan) selain activity
@@ -103,18 +92,24 @@ public class DetailActivity extends AppCompatActivity {
         // Tempelkan Observer ke LiveData object
         detailedMovieViewModel.getDetailedMovie().observe(this, detailedMovieObserver);
 
+        // Add on offset changed listener ke AppBarLayout untuk mengatur
+        // ketika app barnya itu gede/collapse
         detailedAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             boolean isAppBarLayoutShow = false;
             int scrollRange = -1;
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+                // Jika scrollRange berada di posisi default atau -1, maka set value untuk scrollRange
                 if(scrollRange == -1){
                     scrollRange = appBarLayout.getTotalScrollRange();
                 }
 
+                // Jika scroll range dengan vertical offset (parameter) berjumlah 0, maka gedein
+                // app bar layout
                 if(scrollRange + verticalOffset == 0){
                     isAppBarLayoutShow = true;
                 } else if(isAppBarLayoutShow){
+                    // Collapse app bar layout jika booleannya true
                     isAppBarLayoutShow = false;
                 }
 
@@ -128,19 +123,7 @@ public class DetailActivity extends AppCompatActivity {
             public void onChanged(@Nullable ArrayList<MovieItems> detailedMovieItems) {
                 // Ketika data selesai di load, maka kita akan mendapatkan data dan menghilangkan progress bar
                 // yang menandakan bahwa loadingnya sudah selesai
-                imageViewDetailedPosterImage.setVisibility(View.VISIBLE);
-                textViewDetailedMovieTitle.setVisibility(View.VISIBLE);
-                textViewDetailedMovieGenres.setVisibility(View.VISIBLE);
-                textViewDetailedMovieLanguage.setVisibility(View.VISIBLE);
-                textViewDetailedMovieOverview.setVisibility(View.VISIBLE);
-                textViewDetailedMovieRating.setVisibility(View.VISIBLE);
-                textViewDetailedMovieReleaseDate.setVisibility(View.VISIBLE);
-                textViewDetailedMovieStatus.setVisibility(View.VISIBLE);
-                textViewDetailedMovieTagline.setVisibility(View.VISIBLE);
-                languageSpoken.setVisibility(View.VISIBLE);
-                genres.setVisibility(View.VISIBLE);
-                releaseDate.setVisibility(View.VISIBLE);
-                overview.setVisibility(View.VISIBLE);
+                detailedContentMovie.setVisibility(View.VISIBLE);
                 detailedProgressBar.setVisibility(View.GONE);
 
                 // Set semua data ke dalam detail activity

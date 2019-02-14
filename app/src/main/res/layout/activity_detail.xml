@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
+<!-- Set id untuk CoordinatorLayout agar dpt menghandle orientation changes -->
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/coordinator_layout"
+    android:id="@+id/detailed_coordinator_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
@@ -36,6 +36,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <!-- Masukkin layout NestedScrollView -->
     <include layout="@layout/detailed_content_scrolling"/>
 
     <ProgressBar
